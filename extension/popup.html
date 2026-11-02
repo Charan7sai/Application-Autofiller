@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Resume Autofill</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <section id="empty" hidden>
+    <h1>Add your resume</h1>
+    <p>Upload it once and check the details. After that, one click fills your forms.</p>
+    <button id="upload" class="primary">Upload resume</button>
+  </section>
+
+  <section id="ready" hidden>
+    <div class="who">
+      <strong id="name"></strong>
+      <span id="email"></span>
+    </div>
+    <button id="fill" class="primary">Fill this page</button>
+    <div id="result" role="status"></div>
+    <button id="edit" class="link">Edit my details</button>
+  </section>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

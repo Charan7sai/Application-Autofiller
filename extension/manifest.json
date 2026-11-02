@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Resume Autofill",
+  "version": "1.0.0",
+  "description": "Upload your resume once, then fill job applications and other forms from it. Nothing is ever submitted for you.",
+  "permissions": ["storage", "unlimitedStorage", "scripting", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Resume Autofill",
+    "default_icon": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" }
+  },
+  "icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "commands": {
+    "fill-page": {
+      "suggested_key": { "default": "Alt+Shift+F" },
+      "description": "Fill this page from your resume"
+    }
+  }
+}

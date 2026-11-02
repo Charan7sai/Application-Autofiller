@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resume Autofill</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Resume Autofill</h1>
+      <span id="saved" role="status"></span>
+    </header>
+
+    <label id="drop" class="drop" for="file">
+      <strong id="dropTitle">Upload your resume</strong>
+      <span id="dropHint">PDF, DOCX or TXT. Click or drop it here.</span>
+      <input id="file" type="file" accept=".pdf,.docx,.txt,.md">
+    </label>
+    <div id="message" role="alert" hidden></div>
+
+    <details id="aiBox" class="card">
+      <summary>Read my resume with AI <small>Optional, better on unusual layouts</small></summary>
+      <p>Works out of the box without this. If you turn it on, your resume is sent to Anthropic each time you upload, using your own API key, which you pay for per use. The key stays in this browser.</p>
+      <label class="check"><input id="aiOn" type="checkbox"> Use AI when I upload a resume</label>
+      <label class="field"><span>Anthropic API key</span><input id="aiKey" type="password" autocomplete="off" spellcheck="false"></label>
+    </details>
+
+    <div id="form" hidden>
+      <p class="tip">Check these before your first fill. Orange boxes were not found in your resume. Anything left blank is skipped on forms. Changes save by themselves.</p>
+      <div id="sections"></div>
+      <button id="clear" class="danger" type="button">Delete my resume and details</button>
+    </div>
+  </main>
+  <script src="options.js" type="module"></script>
+</body>
+</html>

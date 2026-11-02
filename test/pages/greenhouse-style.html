@@ -1,0 +1,54 @@
+<!doctype html><title>Greenhouse-style form (local replica, written from memory)</title><body>
+<div id="root"></div>
+<script src="/vendor/react.js"></script><script src="/vendor/react-dom.js"></script>
+<script>
+const e = React.createElement;
+window.state = {};
+function Field({ id, label, type }) {
+  const [v, setV] = React.useState('');
+  return e('div', { className: 'input-wrapper' },
+    e('label', { htmlFor: id, id: id + '-label', className: 'label' }, label, e('span', { className: 'required' }, '*')),
+    e('input', { id, type: type || 'text', 'aria-required': 'true', value: v, onChange: (x) => { setV(x.target.value); window.state[id] = x.target.value; } }));
+}
+function Select({ id, label, options }) {
+  const [open, setOpen] = React.useState(false);
+  const [q, setQ] = React.useState('');
+  const [v, setV] = React.useState('');
+  const shown = options.filter((o) => o.toLowerCase().includes(q.toLowerCase()));
+  return e('div', { className: 'select' },
+    e('label', { htmlFor: id, id: id + '-label' }, label),
+    e('div', { className: 'select__control' },
+      v ? e('div', { className: 'select__single-value' }, v) : e('div', { className: 'select__placeholder' }, 'Select...'),
+      e('input', { id, className: 'select__input', role: 'combobox', 'aria-autocomplete': 'list', 'aria-expanded': open, 'aria-labelledby': id + '-label', value: q, autoComplete: 'off',
+        onFocus: () => setOpen(true), onMouseDown: () => setOpen(true), onBlur: () => setTimeout(() => setOpen(false), 150), onChange: (x) => { setQ(x.target.value); setOpen(true); } })),
+    open ? e('div', { className: 'select__menu', role: 'listbox' }, shown.length
+      ? shown.map((o) => e('div', { role: 'option', key: o, onClick: () => { setV(o); setQ(''); setOpen(false); window.state[id] = o; } }, o))
+      : e('div', { className: 'select__menu-notice' }, 'No options')) : null);
+}
+function App() {
+  return e('form', { id: 'application-form' },
+    e('h3', null, 'Apply for this job'),
+    e(Field, { id: 'first_name', label: 'First Name' }),
+    e(Field, { id: 'last_name', label: 'Last Name' }),
+    e(Field, { id: 'email', label: 'Email', type: 'email' }),
+    e(Select, { id: 'country', label: 'Country', options: ['Canada +1', 'India +91', 'United States +1'] }),
+    e(Field, { id: 'phone', label: 'Phone', type: 'tel' }),
+    e('div', { role: 'group', 'aria-labelledby': 'upload-label-resume' },
+      e('div', { id: 'upload-label-resume', className: 'label' }, 'Resume/CV'),
+      e('input', { id: 'resume', type: 'file', style: { position: 'absolute', width: 1, height: 1, opacity: 0 } })),
+    e('div', { role: 'group', 'aria-labelledby': 'upload-label-cover_letter' },
+      e('div', { id: 'upload-label-cover_letter', className: 'label' }, 'Cover Letter'),
+      e('input', { id: 'cover_letter', type: 'file', style: { position: 'absolute', width: 1, height: 1, opacity: 0 } })),
+    e(Field, { id: 'question_1', label: 'LinkedIn Profile' }),
+    e(Field, { id: 'question_2', label: 'Website' }),
+    e(Select, { id: 'question_3', label: 'Are you legally authorized to work in the country where this job is located?', options: ['Yes', 'No'] }),
+    e('h3', null, 'Education'),
+    e(Select, { id: 'school--0', label: 'School', options: ['Indian Institute of Technology Hyderabad', 'Other'] }),
+    e(Select, { id: 'degree--0', label: 'Degree', options: ["Bachelor's Degree", "Master's Degree", 'Other'] }),
+    e(Select, { id: 'discipline--0', label: 'Discipline', options: ['Computer Science', 'Biology'] }),
+    e('h3', null, 'Voluntary Self-Identification'),
+    e(Select, { id: 'gender', label: 'Gender', options: ['Male', 'Female', 'Decline To Self Identify'] }),
+    e(Select, { id: 'veteran_status', label: 'Veteran Status', options: ['I am not a protected veteran'] }));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(e(App));
+</script>

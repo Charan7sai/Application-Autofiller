@@ -1,0 +1,36 @@
+<!doctype html><title>Plain application</title><body>
+<h2>Personal details</h2>
+<form id="f">
+<label for="a">First Name *</label><input id="a" name="q1" required>
+<label for="b">Last Name *</label><input id="b" name="q2" required>
+<label>Email address<input name="applicant_email" type="email"></label>
+<label>Phone<input name="tel" type="tel"></label>
+<label>LinkedIn Profile<input name="li"></label>
+<label>GitHub URL<input name="gh"></label>
+<label>City<input name="c1"></label>
+<label>State<select name="st"><option value="">Select</option><option>Karnataka</option><option>Telangana</option></select></label>
+<label>Country<select name="co"><option value="">Select</option><option value="US">United States</option><option value="IN">India</option></select></label>
+<label>Which company name did you hear about first<input name="heard" id="target"></label>
+<label>Preferred start date<input name="availability" id="avail"></label>
+<h2>Work experience</h2>
+<div><label>Company<input name="work[0][company]"></label><label>Job Title<input name="work[0][title]"></label>
+<label>Start date<input name="work[0][from]" placeholder="MM/YYYY"></label><label>End date<input name="work[0][to]" placeholder="MM/YYYY"></label>
+<label><input type="checkbox" name="work[0][cur]"> I currently work here</label><label>Description<textarea name="work[0][d]"></textarea></label></div>
+<h2>Education</h2>
+<div><label>School<input name="ed[0][s]"></label>
+<label>Degree<select name="ed[0][deg]"><option value="">Select</option><option>High School</option><option>Bachelor's Degree</option><option>Master's Degree</option></select></label>
+<label>Field of study<input name="ed[0][f]"></label><label>GPA<input name="ed[0][g]"></label>
+<label>Start date<input type="month" name="ed[0][from]"></label></div>
+<h2>Resume</h2>
+<label>Upload resume<input type="file" name="resume"></label>
+<label>Cover letter<input type="file" name="cover"></label>
+<h2>Emergency contact</h2>
+<label>Name<input name="ec_name" id="ec"></label><label>Phone<input name="ec_phone" id="ecp"></label>
+<h2>Voluntary disclosures</h2>
+<label>Gender<select name="g" id="gender"><option value="">Select</option><option>Female</option><option>Male</option></select></label>
+<label>Date of birth<input name="dob" id="dob"></label>
+<fieldset><legend>Are you legally authorized to work in this country?</legend><label><input type="radio" name="auth" value="y">Yes</label><label><input type="radio" name="auth" value="n">No</label></fieldset>
+<input name="website_hp" id="hp" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" tabindex="-1">
+<label>City you were born in, if already known<input name="prefilled_city" id="pre" value="Keep Me"></label>
+<button id="go">Submit</button></form>
+<script>window.submitted=0;document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();window.submitted++});</script>
